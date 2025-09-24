@@ -1,0 +1,21 @@
+# IDE settings
+.idea/
+.vscode/
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Build output
+target/
+build/
+*.class
+*.jar
+*.war
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
