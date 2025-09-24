@@ -1,0 +1,95 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.success-container {
+  background: white;
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #2ecc71;
+  margin-bottom: 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: #2ecc71;
+  margin: 2rem 0;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ticket-details {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.ticket-details h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.ticket-details p {
+  margin: 0.5rem 0;
+  color: #7f8c8d;
+}
+
+.instructions {
+  text-align: left;
+  margin: 2rem 0;
+}
+
+.instructions h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.instructions p {
+  margin: 0.5rem 0;
+  color: #7f8c8d;
+}
+
+.home-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+}
+
+.home-button:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .success-container {
+    padding: 2rem;
+  }
+} 

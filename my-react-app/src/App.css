@@ -1,0 +1,286 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Form Styles */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Stop Selection Styles */
+.stop-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stop-button {
+  padding: 1.5rem;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+}
+
+.stop-button:hover {
+  border-color: #4CAF50;
+  transform: translateY(-2px);
+}
+
+.stop-button.selected {
+  border-color: #4CAF50;
+  background-color: #f0fff0;
+}
+
+.stop-button h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.stop-button p {
+  margin: 0;
+  color: #666;
+}
+
+/* Payment Page Styles */
+.payment-details {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.payment-details h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.payment-details p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.confirm-button {
+  background-color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+.confirm-button:hover {
+  background-color: #45a049;
+}
+
+/* Error Message Styles */
+.error-message {
+  color: #ff4444;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  color: #666;
+  margin: 2rem 0;
+}
+
+/* Back Button */
+.back-button {
+  background-color: #666;
+}
+
+.back-button:hover {
+  background-color: #555;
+}
+
+/* Payment Status Styles */
+.payment-status {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.payment-status.success {
+  border-left: 4px solid #4CAF50;
+}
+
+.payment-status.error {
+  border-left: 4px solid #ff4444;
+}
+
+.payment-status h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.payment-status p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.status-icon {
+  font-size: 4rem;
+  color: #ff4444;
+  margin: 2rem 0;
+}
+
+/* Success Page Styles */
+.success-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: #4CAF50;
+  margin: 2rem 0;
+}
+
+.ticket-details {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.instructions {
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.instructions h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.instructions p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+/* Available buses styles */
+.available-buses {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.available-buses h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.bus-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.bus-item {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.bus-item:hover {
+  background-color: #e9ecef;
+}
+
+.bus-item.selected {
+  border-color: #3498db;
+  background-color: #e3f2fd;
+}
+
+.bus-item p {
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .bus-list,
+  .stop-list {
+    grid-template-columns: 1fr;
+  }
+}
