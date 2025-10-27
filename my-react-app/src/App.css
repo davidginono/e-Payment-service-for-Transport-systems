@@ -145,6 +145,16 @@ button:disabled {
   text-align: center;
 }
 
+.info-message {
+  color: #1b4f72;
+  background-color: #eaf4fe;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  text-align: center;
+  border-left: 4px solid #3498db;
+}
+
 /* Loading State */
 .loading {
   text-align: center;

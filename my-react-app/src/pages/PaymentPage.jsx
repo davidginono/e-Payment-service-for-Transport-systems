@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PaymentPage.css';
@@ -6,7 +6,7 @@ import './PaymentPage.css';
 function PaymentPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { stop, busId } = location.state || { stop: null, busId: '' };
+  const { stop, busId, scanLocation, stops } = location.state || { stop: null, busId: '', scanLocation: null, stops: [] };
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -55,7 +55,7 @@ function PaymentPage() {
         // Poll for payment status until COMPLETED or timeout
         let statusResult = null;
         let attempts = 0;
-        const maxAttempts = 15; // e.g. poll for up to 225 seconds
+        const maxAttempts = 7; // e.g. poll for up to 225 seconds
         const pollInterval = 7000; // 15 seconds
         while (attempts < maxAttempts) {
           const statusResponse = await axios.get(
@@ -143,9 +143,9 @@ function PaymentPage() {
 
       <button 
         className="back-button"
-        onClick={() => navigate('/stops', { state: { stops: [stop], busId } })}
+        onClick={() => navigate('/journey-preview', { state: { stop, busId, scanLocation, stops } })}
       >
-        Back to Stops
+        Back to Journey
       </button>
     </div>
   );

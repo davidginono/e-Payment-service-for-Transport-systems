@@ -48,7 +48,8 @@ function RegisterPage() {
       } else {
         setError(data.message || 'Registration failed');
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Passenger registration failed', error);
       setError('An error occurred during registration');
     } finally {
       setLoading(false);

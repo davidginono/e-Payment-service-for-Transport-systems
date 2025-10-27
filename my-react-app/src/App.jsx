@@ -6,6 +6,7 @@ import PaymentPage from './pages/PaymentPage';
 import SuccessPage from './pages/SuccessPage';
 import RegisterPage from './pages/RegisterPage';
 import ManualEntryPage from './pages/ManualEntryPage';
+import JourneyPreviewPage from './pages/JourneyPreviewPage';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/stops" element={<StopsPage />} />
+        <Route path="/journey-preview" element={<JourneyPreviewPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/success" element={<SuccessPage />} />
          <Route path="/register" element={<RegisterPage />} />

@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ManualEntryPage.css';
 
 function ManualEntryPage() {
   const [busId, setBusId] = useState('');
   const [error, setError] = useState('');
+  const [locationError, setLocationError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const captureCurrentLocation = useCallback(() => {
+    if (!navigator.geolocation) {
+      return Promise.reject(new Error('Geolocation is not supported by this browser.'));
+    }
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+          capturedAt: position.timestamp || Date.now(),
+        }),
+        (geoError) => reject(geoError),
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    });
+  }, []);
 
   const handleBusIdSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +40,17 @@ function ManualEntryPage() {
 
     setLoading(true);
     setError('');
+    setLocationError('');
+
+    let scanLocation;
+    try {
+      scanLocation = await captureCurrentLocation();
+    } catch (locationFailure) {
+      console.error('Location capture failed during manual entry', locationFailure);
+      setLocationError('Location access is required to continue. Please enable location services and try again.');
+      setLoading(false);
+      return;
+    }
     
     try {
       const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bus/${busId}/stops`, {
@@ -31,8 +65,9 @@ function ManualEntryPage() {
       }
       
       const data = await response.json();
-      navigate('/stops', { state: { stops: data, busId } });
-    } catch (err) {
+      navigate('/stops', { state: { stops: data, busId, scanLocation } });
+    } catch (error) {
+      console.error('Error fetching stops for manual bus entry', error);
       setError('Error fetching stops. Please check the bus ID and try again.');
     } finally {
       setLoading(false);
@@ -64,6 +99,7 @@ function ManualEntryPage() {
       </div>
 
       {error && <div className="error-message">{error}</div>}
+      {locationError && <div className="error-message">{locationError}</div>}
 
       <button 
         className="back-button"

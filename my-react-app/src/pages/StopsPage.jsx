@@ -5,10 +5,12 @@ import './StopsPage.css';
 function StopsPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { stops: initialStops, busId } = location.state || { stops: [], busId: '' };
+  const { stops: initialStops, busId, scanLocation: initialScanLocation } = location.state || { stops: [], busId: '', scanLocation: null };
   const [stops, setStops] = useState(initialStops);
   const [selectedStop, setSelectedStop] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [scanLocation] = useState(initialScanLocation);
 
   useEffect(() => {
     if (!busId) {
@@ -32,8 +34,10 @@ function StopsPage() {
         
         const data = await response.json();
         setStops(data);
+        setError('');
       } catch (err) {
         console.error('Error fetching stops:', err);
+        setError('Could not load stops. Please retry or rescan the bus QR code.');
       } finally {
         setLoading(false);
       }
@@ -44,35 +48,46 @@ function StopsPage() {
 
   const handleStopSelect = (stop) => {
     setSelectedStop(stop);
-    // Automatically navigate to payment page when a stop is selected
-    navigate('/payment', { state: { stop, busId } });
+    navigate('/journey-preview', { state: { stop, busId, scanLocation, stops } });
   };
-
-  if (loading) {
-    return (
-      <div className="container">
-        <div className="loading-message">Loading stops...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="container">
       <h1>Select Your Stop</h1>
       <p className="bus-info">Bus ID: {busId}</p>
 
-      <div className="stop-list">
-        {stops.map((stop) => (
-          <button
-            key={stop.stop_id}
-            className={`stop-button ${selectedStop?.stop_id === stop.stop_id ? 'selected' : ''}`}
-            onClick={() => handleStopSelect(stop)}
-          >
-            <h3>{stop.stop_name}</h3>
-          <p>Price: tzs{stop.price}</p>
-          </button>
-        ))}
-      </div>
+      {!scanLocation && (
+        <div className="info-message">
+          Location access was not granted. Distance preview will be unavailable until you rescan and allow location.
+        </div>
+      )}
+
+      {loading ? (
+        <div className="loading-message">Loading stops...</div>
+      ) : (
+        <div className="stop-list">
+          {stops.map((stop) => (
+            <button
+              key={stop.stop_id}
+              className={`stop-button ${selectedStop?.stop_id === stop.stop_id ? 'selected' : ''}`}
+              onClick={() => handleStopSelect(stop)}
+            >
+              <h3>{stop.stop_name}</h3>
+              <p>Price: tzs{stop.price}</p>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {!loading && stops.length === 0 && !error && (
+        <div className="loading-message">No stops found for this bus.</div>
+      )}
+
+      {error && (
+        <div className="error-message">
+          {error}
+        </div>
+      )}
 
       <button 
         className="back-button"
